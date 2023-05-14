@@ -1,3 +1,18 @@
+@mixin mobile {
+    @media screen and (max-width:480px){
+        @content;
+    } 
+}
+@mixin tablet {
+    @media screen and (max-width:1084px){
+        @content;
+    } 
+}
+@mixin laptop {
+    @media screen and (max-width:1220px){
+        @content;
+    } 
+}
 body {
     margin: 0px;
 }
@@ -101,16 +116,35 @@ body {
         width: 93%;
         height: 90%;
         display: flex;
+        @include tablet{
+            width: 100%;
+            height: 100%;
+            border-radius: 0px;
+            border: none;
+        }
+        @include mobile{
+            width: 100%;
+            height: 100%;
+            border-radius: 0px;
+            border: none;
+        }
+        
 
         .Sidebar {
             flex: 1;
             border-right: 1px solid #3e3c61;
             background-color: #3e3c61;
+            overflow: auto;
+            @include tablet{
+            }
+            @include mobile{
+            }
 
             .Navbar {
                 display: flex;
                 align-items: center;
                 background-color: #2f2d52;
+                gap: 10px;
                 height: 60px;
                 padding: 10px;
                 justify-content: space-between;
@@ -120,6 +154,12 @@ body {
             .logo {
                 font-weight: bold;
                 padding-left: 25px;
+                @include tablet{
+                    display: none;
+                }
+                @include mobile{
+                    display: none;
+                }
             }
 
             .user {
@@ -143,6 +183,16 @@ body {
                     border: none;
                     cursor: pointer;
                     font-size: 10px;
+                    @include tablet{
+                       position: absolute;
+                       bottom: 10px;
+                                            
+                    }
+                    @include mobile{
+                        position: absolute;
+                        bottom: 10px;
+                    }
+            
                 }
 
                 span {
@@ -233,7 +283,7 @@ body {
             background-color: #ddddf7;
             padding: 10px;
             height: calc(100% - 170px);
-            overflow: scroll;
+            overflow: auto;
 
             .message{
                 display: flex;
@@ -255,21 +305,42 @@ body {
                    }
                 }
                 .messageContent{
-                  max-width: 80%;
+                    // width:fit-content;
                   display: flex;
                   flex-direction: column;
                   gap: 10px;
                   p{
+                    width: fit-content;
+                    flex-wrap: wrap;
                     background-color: white;
                     padding: 10px 20px;
+                    max-width: 60%;
+                    overflow: hidden;
                     border-radius: 0px 10px 10px;
                   }
                    img{
-                    width: 50%;
+                    width: 45%;
+                    border-radius: 0px 10px 10px;
+
 
                    }
                 }
-            }
+                &.owner{
+                    flex-direction: row-reverse; 
+                    .messageContent{
+                        align-items: flex-end;
+                        p{
+                            background-color: #8da4f1;
+                            color: white;
+                            border-radius: 10px 0px 10px 10px;
+                        }  
+                        img{
+                            border-radius: 10px 0px 10px 10px;
+                        }               
+
+                    }
+                }
+            }                
 
          }
          .input{
